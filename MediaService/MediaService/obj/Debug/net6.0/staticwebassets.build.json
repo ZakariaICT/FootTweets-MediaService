@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "9aDYgrN9ek4KazXGi51kMpSxp8QEiKZHygXUFxSki1Y=",
+  "Source": "MediaService",
+  "BasePath": "_content/MediaService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
