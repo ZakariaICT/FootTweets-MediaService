@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v3E70FyjvtuOu/oMxRBqWw2sbNR46bloVdHpy4pACl1R//G/mFR91aH2AtpbSVh8gCtH71J2GzamY7re0SpyAQ==",
+  "dgSpecHash": "PJLb0kmV6M0FucPq8rpQeBTSQns4UiEh21fj22erO3N3g0yhw06cPhOeXtp8ZACjaNS9TTXCJ++Xjji1mkD56g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ZAHas\\source\\repos\\MediaService\\MediaService\\MediaService.csproj",
+  "projectFilePath": "C:\\Users\\ZAHas\\source\\repos\\Semester 6 GIT\\FootTweets\\MediaService\\MediaService\\MediaService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ZAHas\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ZAHas\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ZAHas\\source\\repos\\MediaService\\MediaService\\MediaService.csproj": {}
+    "C:\\Users\\ZAHas\\source\\repos\\Semester 6 GIT\\FootTweets\\MediaService\\MediaService\\MediaService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ZAHas\\source\\repos\\MediaService\\MediaService\\MediaService.csproj": {
+    "C:\\Users\\ZAHas\\source\\repos\\Semester 6 GIT\\FootTweets\\MediaService\\MediaService\\MediaService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ZAHas\\source\\repos\\MediaService\\MediaService\\MediaService.csproj",
+        "projectUniqueName": "C:\\Users\\ZAHas\\source\\repos\\Semester 6 GIT\\FootTweets\\MediaService\\MediaService\\MediaService.csproj",
         "projectName": "MediaService",
-        "projectPath": "C:\\Users\\ZAHas\\source\\repos\\MediaService\\MediaService\\MediaService.csproj",
+        "projectPath": "C:\\Users\\ZAHas\\source\\repos\\Semester 6 GIT\\FootTweets\\MediaService\\MediaService\\MediaService.csproj",
         "packagesPath": "C:\\Users\\ZAHas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ZAHas\\source\\repos\\MediaService\\MediaService\\obj\\",
+        "outputPath": "C:\\Users\\ZAHas\\source\\repos\\Semester 6 GIT\\FootTweets\\MediaService\\MediaService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
