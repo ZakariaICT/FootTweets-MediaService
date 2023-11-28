@@ -34,8 +34,9 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release --solution C:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets\MediaService\MediaService.sln
-        working-directory: C:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets\MediaService
+        run: dotnet build --configuration Release --solution ${{ github.workspace }}/MediaService/MediaService.sln
+        working-directory: ${{ github.workspace }}/MediaService
+
 
 
         
