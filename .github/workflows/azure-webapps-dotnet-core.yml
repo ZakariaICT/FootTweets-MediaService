@@ -34,8 +34,9 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release --solution ${{ github.workspace }}/MediaService/MediaService.sln
+        run: dotnet build ${{ github.workspace }}/MediaService/MediaService.sln --configuration Release
         working-directory: ${{ github.workspace }}/MediaService
+
 
 
 
