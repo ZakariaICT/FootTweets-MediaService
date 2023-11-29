@@ -35,7 +35,7 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build 
-        working-directory: C:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets\MediaService>MediaService.sln
+        working-directory: \Semester 6 GIT\FootTweets\MediaService>MediaService.sln
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
