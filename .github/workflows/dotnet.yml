@@ -22,7 +22,7 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: MediaService/Mediaservice/MediaService.csproj
+      working-directory: MediaService/Mediaservice  # Set the working directory here
     - name: Build
       run: dotnet build --no-restore
     - name: Test
