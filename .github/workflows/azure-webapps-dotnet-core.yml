@@ -20,6 +20,5 @@ jobs:
 
     - name: Build
       run: |
-        cd "C:/Users/ZAHas/source/repos/Semester 6 GIT/FootTweets/MediaService/MediaService.sln"
+        cd "C:/Users/ZAHas/source/repos/Semester 6 GIT/FootTweets/MediaService"
         dotnet build MediaService.sln
-
