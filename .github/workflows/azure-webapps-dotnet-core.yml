@@ -34,8 +34,9 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Build with dotnet
-        run: dotnet build 
-        working-directory: \Semester 6 GIT\FootTweets\MediaService>MediaService.sln
+        run: cd "C:/Users/ZAHas/source/repos/Semester 6 GIT/FootTweets/MediaService/MediaService.sln"
+             dotnet build MediaService.sln
+                              
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
