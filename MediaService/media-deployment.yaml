@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mediaservice-deployment
+  name: media-deployment.yaml
 spec:
   replicas: 1   # Adjust the number of replicas as needed
   selector:
     matchLabels:
-      app: mediaserviceaks
+      app: mediaservice
   template:
     metadata:
       labels:
-        app: mediaserviceaks
+        app: mediaservice
     spec:
       containers:
       - name: infallible-dubinsky
@@ -29,10 +29,8 @@ spec:
   ports:
     - name: http-port
       protocol: TCP
-      port: 5117
       targetPort: 80
     - name: https-port
       protocol: TCP
-      port: 7117
       targetPort: 443   # Adjust the target port as needed
   type: LoadBalancer   # Use NodePort, ClusterIP, or LoadBalancer based on your setup
