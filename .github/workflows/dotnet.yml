@@ -10,19 +10,28 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+
     - name: Restore dependencies
       run: dotnet restore
+
     - name: Build
       run: dotnet build --no-restore
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t zakaria469980/mediaservice .
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push zakaria469980/userservice:latest
