@@ -20,7 +20,7 @@ namespace MediaService.Controllers
             _repository = repository;
         }
         
-        [HttpGet]    
+        [HttpGet("all")]    
         public ActionResult<IEnumerable<PictureReadDTO>> GetPictures()
         {
             Console.WriteLine("--> Getting Logins.....");
@@ -43,7 +43,7 @@ namespace MediaService.Controllers
             return NotFound();
         }
 
-        [HttpPost]
+        [HttpPost("post")]
         public ActionResult<PictureReadDTO> CreatePicture(PicturesDTO pictures)
         {
             var pictureModel =_mapper.Map<Pictures>(pictures);
