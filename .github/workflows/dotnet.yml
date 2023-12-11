@@ -11,7 +11,7 @@ on:
 
 
 env:
-    AZURE_WEBAPP_NAME: foot-tweets-web-app
+    AZURE_WEBAPP_NAME: Foot-Tweets-Web-App
     AZURE_WEBAPP_PACKAGE_PATH: "./publish"
 
 jobs:
