@@ -33,7 +33,8 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Publish
-      run: dotnet publish MediaService/MediaService.csproj --configuration Release --no-build '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}' 
+      run: dotnet publish MediaService/MediaService.csproj --configuration Release --output './publish'
+ 
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
