@@ -9,14 +9,10 @@ namespace MediaService.Data
         {
 
         }
+
         public DbSet<Pictures> pictures { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // Remove this line
-            // optionsBuilder.UseSqlServer(@"Server=mssqlstud.fhict.local;Database=dbi469980_userdb;User Id=dbi469980_userdb;Password=Xtt4d-8HNK; TrustServerCertificate=True;");
-        }
-
+        // Remove the OnConfiguring method
 
     }
 }
