@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+
+env:
+    AZURE_WEBAPP_NAME: foot-tweets-web-app
+    AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -27,6 +32,9 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
+    - name: Publish
+      run: dotnet publish ./mediaservice.sln --configuration Release --no-build '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}' 
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
@@ -35,3 +43,10 @@ jobs:
         docker build -t zakaria469980/mediaservice .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push zakaria469980/mediaservice:latest
+
+    - name: Deployment
+      uses: actions/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ AZURE_PUBLISH_PROFILE }}
+        package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
