@@ -28,7 +28,7 @@ spec:
   ports:
     - protocol: TCP
       port: 5118
-      targetPort: 81
+      targetPort: 5118
       name: http-port
     - protocol: TCP
       port: 7117
