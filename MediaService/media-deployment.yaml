@@ -27,10 +27,14 @@ spec:
     app: mediaservice  # Adjusted to match the correct label
   ports:
     - protocol: TCP
-      port: 5118
-      targetPort: 5118
+      port: 5117
+      targetPort: 80
       name: http-port
-    - name: postgres 
+    - protocol: TCP
+      port: 7117
+      targetPort: 443
+      name: https-port
+    - name: postgres-mediaservice 
       protocol: TCP
       port: 5433
       targetPort: 5433
