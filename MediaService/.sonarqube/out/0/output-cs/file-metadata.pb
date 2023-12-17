@@ -1,0 +1,19 @@
+w
+nC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Controllers\MediaController.csutf-8Å
+xC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Controllers\WeatherForecastController.csutf-8m
+dC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Data\AppDbContext.csutf-8n
+eC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\DTO\PictureReadDTO.csutf-8k
+bC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\DTO\PicturesDTO.csutf-8n
+eC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Mapper\MediaMapper.csutf-8Ü
+}C:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Migrations\20231217141744_UpdatedMigration.csutf-8í
+ÜC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Migrations\20231217141744_UpdatedMigration.Designer.csutf-8Ç
+wC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Migrations\AppDbContextModelSnapshot.csutf-8j
+aC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Model\Pictures.csutf-8c
+ZC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Program.csutf-8s
+jC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Repositories\IMediaRepo.csutf-8r
+iC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\Repositories\MediaRepo.csutf-8k
+bC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\WeatherForecast.csutf-8ä
+C:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\obj\Debug\net6.0\MediaService.GlobalUsings.g.csutf-8õ
+èC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.csutf-8à
+}C:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\obj\Debug\net6.0\MediaService.AssemblyInfo.csutf-8ú
+êC:\Users\ZAHas\source\repos\Semester 6 GIT\FootTweets-MediaService\mediaservice\obj\Debug\net6.0\MediaService.MvcApplicationPartsAssemblyInfo.csutf-8

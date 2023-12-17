@@ -9,7 +9,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -30,7 +29,6 @@ jobs:
 
     - name: Publish
       run: dotnet publish MediaService/MediaService.csproj --configuration Release --output './publish'
- 
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
@@ -40,4 +38,13 @@ jobs:
         docker build -t zakaria469980/meeeeediaservice .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push zakaria469980/meeeeediaservice:latest
+
+    - name: SonarQube Scan
+      run: |
+        dotnet tool install --global dotnet-sonarscanner
+        dotnet sonarscanner begin /k:"FootTweets-Sonar-Media" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        dotnet build
+        dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+
 
