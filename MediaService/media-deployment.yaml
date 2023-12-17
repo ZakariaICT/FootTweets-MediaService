@@ -30,10 +30,6 @@ spec:
       port: 5118
       targetPort: 5118
       name: http-port
-    - protocol: TCP
-      port: 7117
-      targetPort: 443
-      name: https-port
     - name: postgres 
       protocol: TCP
       port: 5433
