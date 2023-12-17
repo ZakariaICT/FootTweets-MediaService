@@ -11,7 +11,7 @@ namespace MediaService.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=mediaservice-postgres;Database=mydatabase;Username=myuser;Password=mypassword;");
+            optionsBuilder.UseNpgsql("Host=postgres-service-media;Database=mydatabase;Username=myuser;Password=mypassword;");
         }
 
 
