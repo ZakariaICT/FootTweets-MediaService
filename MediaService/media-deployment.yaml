@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mediaservice-deployment
 spec:
-  replicas: 1   # Adjust the number of replicas as needed
+  replicas: 1
   selector:
     matchLabels:
       app: mediaservice
@@ -14,7 +14,35 @@ spec:
     spec:
       containers:
         - name: mediaservice
-          image: zakaria469980/mediaservice:latest
+          image: zakaria469980/realestuserservice:latest
+          ports:
+            - containerPort: 5117
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: media-service
+spec:
+  selector:
+    app: mediaservice  # Adjusted to match the correct label
+  ports:
+    - protocol: TCP
+      port: 5117
+      targetPort: 80
+      name: http-port
+    - protocol: TCP
+      port: 7117
+      targetPort: 443
+      name: https-port
+    - name: postgres 
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: LoadBalancer
+
+
+
+
 # ---
 # apiVersion: v1
 # kind: Service
@@ -29,20 +57,3 @@ spec:
 #       protocol: TCP
 #       port: 80
 #       targetPort: 80
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: media-service-clusterip
-spec:
-  type: ClusterIP
-  selector:
-    app: mediaservice
-  ports:
-    - name: mediaservice
-      protocol: TCP
-      port: 80
-      targetPort: 80
-
-

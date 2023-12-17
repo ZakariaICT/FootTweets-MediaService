@@ -1,16 +1,19 @@
 ﻿using MediaService.Model;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace MediaService.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
+        public DbSet<Pictures> pictures { get; set; } // Updated to PascalCase for better convention
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=mediaservice-postgres;Database=mydatabase;Username=myuser;Password=mypassword;");
         }
 
-        public DbSet<Pictures> pictures { get; set; }
 
         // Remove the OnConfiguring method
 
