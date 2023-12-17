@@ -14,9 +14,9 @@ spec:
     spec:
       containers:
         - name: mediaservice
-          image: zakaria469980/newmediaservice:latest
+          image: zakaria469980/newestmediaservice:latest
           ports:
-            - containerPort: 5117
+            - containerPort: 5118
 ---
 apiVersion: v1
 kind: Service
@@ -27,8 +27,8 @@ spec:
     app: mediaservice  # Adjusted to match the correct label
   ports:
     - protocol: TCP
-      port: 5117
-      targetPort: 80
+      port: 5118
+      targetPort: 81
       name: http-port
     - protocol: TCP
       port: 7117
@@ -36,8 +36,8 @@ spec:
       name: https-port
     - name: postgres 
       protocol: TCP
-      port: 5432
-      targetPort: 5432
+      port: 5433
+      targetPort: 5433
   type: LoadBalancer
 
 
