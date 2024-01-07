@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mediaservice
-          image: zakaria469980/footmediaserviceeeeee:latest
+          image: zakaria469980/footmediaserviceeeeeee:latest
           ports:
             - containerPort: 5118
 ---
@@ -36,7 +36,7 @@ spec:
       name: https-port
     - name: postgres-media
       protocol: TCP
-      port: 5432
+      port: 5433
       targetPort: 5432
   type: ClusterIP
 
