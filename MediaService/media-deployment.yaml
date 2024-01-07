@@ -36,8 +36,8 @@ spec:
       name: https-port
     - name: postgres-media
       protocol: TCP
-      port: 5433
-      targetPort: 5433
+      port: 5432
+      targetPort: 5432
   type: ClusterIP
 
 
