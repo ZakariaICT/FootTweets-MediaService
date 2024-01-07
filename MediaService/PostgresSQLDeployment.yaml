@@ -35,5 +35,5 @@ spec:
   ports:
     - name: postgres
       protocol: TCP
-      port: 5433
-      targetPort: 5433
+      port: 5432
+      targetPort: 5432
