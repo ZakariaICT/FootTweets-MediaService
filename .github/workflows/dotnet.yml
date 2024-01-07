@@ -35,9 +35,9 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t zakaria469980/footmediaservice .
+        docker build -t zakaria469980/footmediaservicee .
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker push zakaria469980/footmediaservice:latest
+        docker push zakaria469980/footmediaservicee:latest
 
 
 
