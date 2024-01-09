@@ -34,7 +34,7 @@ spec:
       port: 7117
       targetPort: 443
       name: https-port
-  type: LoadBalancer
+  type: ClusterIP
 
 
 
