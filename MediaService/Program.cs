@@ -33,13 +33,7 @@ builder.Services.AddSingleton(serviceProvider =>
     };
 
     var connection = factory.CreateConnection();
-    var channel = connection.CreateModel();
-
-    // Declare queues
-    channel.QueueDeclare("tweets_queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
-    channel.QueueDeclare("uid_queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
-
-    return new RabbitMQService(channel);
+    return connection;
 });
 
 builder.Services.AddSingleton<RabbitMQListener>(); // Add RabbitMQListener as a singleton

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mediaservice
-          image: zakaria469980/mediafootserviceee:latest
+          image: zakaria469980/mediafootserviceeeeetttt:latest
           ports:
             - containerPort: 5118
 ---

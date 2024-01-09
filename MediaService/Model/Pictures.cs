@@ -13,8 +13,7 @@ namespace MediaService.Model
 
         [Required]
         public string PictureURL { get; set; }
-        [Required]
 
-        public string Uid { get; set; }
+        public string? Uid { get; set; }
     }
 }

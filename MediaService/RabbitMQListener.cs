@@ -1,39 +1,42 @@
-﻿using MediaService.Model;
-using RabbitMQ.Client;
+﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
+using MediaService.Model;
 
 namespace MediaService
 {
     public class RabbitMQListener
     {
-        private readonly IModel _channel;
+        private readonly IConnection _connection;
 
-        public RabbitMQListener(IModel channel)
+        public RabbitMQListener(IConnection connection)
         {
-            _channel = channel;
+            _connection = connection;
         }
 
         public void StartListeningForUid(string queueName)
         {
-            // Similar to the RabbitMQConsumer, set up a listener for the UID queue
-            // Use a method like StartListening in RabbitMQConsumer to consume UID and create tweets
-            // Ensure you call this method during the service startup
-
-            // Example:
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (model, ea) =>
+            using (var channel = _connection.CreateModel())
             {
-                var body = ea.Body.ToArray();
-                var uid = Encoding.UTF8.GetString(body);
+                // Similar to the RabbitMQConsumer, set up a listener for the UID queue
+                // Use a method like StartListening in RabbitMQConsumer to consume UID and create tweets
+                // Ensure you call this method during the service startup
 
-                // Create a new tweet using the UID
-                CreateTweetWithUid(uid);
-            };
+                // Example:
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (model, ea) =>
+                {
+                    var body = ea.Body.ToArray();
+                    var uid = Encoding.UTF8.GetString(body);
 
-            _channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+                    // Create a new tweet using the UID
+                    CreateTweetWithUid(uid);
+                };
 
-            Console.WriteLine($"Listening to RabbitMQ UID queue: {queueName}");
+                channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+
+                Console.WriteLine($"Listening to RabbitMQ UID queue: {queueName}");
+            }
         }
 
         private void CreateTweetWithUid(string uid)

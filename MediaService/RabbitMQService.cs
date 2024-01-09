@@ -7,9 +7,9 @@ namespace MediaService
 {
     public class RabbitMQService
     {
-        private readonly RabbitMQ.Client.IModel _channel;
+        private readonly IModel _channel;
 
-        public RabbitMQService(RabbitMQ.Client.IModel channel)
+        public RabbitMQService(IModel channel)
         {
             _channel = channel;
         }
