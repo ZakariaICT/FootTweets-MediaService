@@ -33,6 +33,14 @@ namespace MediaService.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Uid")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("pictures");

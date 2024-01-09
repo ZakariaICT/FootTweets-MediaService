@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediaService.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,9 @@ namespace MediaService.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    PictureURL = table.Column<string>(type: "text", nullable: false)
+                    Text = table.Column<string>(type: "text", nullable: false),
+                    PictureURL = table.Column<string>(type: "text", nullable: false),
+                    Uid = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
