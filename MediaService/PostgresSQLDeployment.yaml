@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: mediaservice
   template:
     metadata:
       labels:
-        app: postgres
+        app: mediaservice
     spec:
       containers:
-        - name: postgres
+        - name: postgres-media
           image: postgres:latest
           env:
             - name: POSTGRES_USER
@@ -31,9 +31,8 @@ metadata:
   name: postgres-media
 spec:
   selector:
-    app: postgres
+    app: mediaservice
   ports:
-    - name: postgres
-      protocol: TCP
+    - protocol: TCP
       port: 5433
       targetPort: 5432

@@ -34,11 +34,7 @@ spec:
       port: 7117
       targetPort: 443
       name: https-port
-    - name: postgres-media
-      protocol: TCP
-      port: 5433
-      targetPort: 5432
-  type: ClusterIP
+  type: LoadBalancer
 
 
 
