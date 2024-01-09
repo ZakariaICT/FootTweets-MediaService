@@ -27,11 +27,11 @@ spec:
     app: mediaservice  # Adjusted to match the correct label
   ports:
     - protocol: TCP
-      port: 5117
+      port: 5118
       targetPort: 80
       name: http-port
     - protocol: TCP
-      port: 7117
+      port: 7118
       targetPort: 443
       name: https-port
   type: ClusterIP
