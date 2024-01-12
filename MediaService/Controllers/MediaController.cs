@@ -46,40 +46,64 @@ namespace MediaService.Controllers
             return NotFound();
         }
 
+        // MediaService.Controllers
+
         [HttpPost("post")]
-        public ActionResult<PictureReadDTO> CreatePicture(PicturesDTO pictures)
+        public ActionResult<PictureReadDTO> CreatePicture(PicturesDTO pictures, [FromServices] IServiceProvider serviceProvider, [FromServices] IConfiguration configuration)
         {
-            var pictureModel =_mapper.Map<Pictures>(pictures);
-            _repository.CreatePicture(pictureModel);
-            _repository.saveChanges();
+            var pictureModel = _mapper.Map<Pictures>(pictures);
 
-            var pictureDTO = _mapper.Map<PictureReadDTO>(pictureModel);
+            // Step 1: Create the picture in the database
+            ////_repository.CreatePicture(pictureModel);
+            //////_repository.saveChanges();
 
-            // Send RabbitMQ message
-            var factory = new ConnectionFactory
+            // Step 2: Get UID from RabbitMQ
+            var uidListener = serviceProvider.GetRequiredService<RabbitMQListener>();
+            var uid = uidListener.GetUidFromQueue(serviceProvider);
+
+            if (!string.IsNullOrEmpty(uid))
             {
-                Uri = new Uri(_configuration["RabbitMQConnection"])
-            };
+                // Step 3: Use the received UID to handle the creation of a new picture
+                pictureModel.Uid = uid;
+                _repository.CreatePicture(pictureModel);
+                _repository.saveChanges();
 
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                var rabbitMQService = new RabbitMQService(channel);
-                rabbitMQService.SendMessage($"New user created: {pictureDTO.Text}");
+                // Step 4: Send RabbitMQ message for UID
+                var factory = new ConnectionFactory
+                {
+                    Uri = new Uri(configuration["RabbitMQConnection"])
+                };
 
-                // Process the message immediately in the database
-                ProcessMessageLocally(pictureDTO);
+                using (var connection = factory.CreateConnection())
+                {
+                    var channel = connection.CreateModel();
+                    var rabbitMQService = new RabbitMQService(channel);
+                    rabbitMQService.SendMessage($"New picture created: {pictureModel.Text}, {pictureModel.Uid}");
+                }
+
+                return CreatedAtRoute(nameof(GetPictureByID), new { Id = pictureModel.Id }, _mapper.Map<PictureReadDTO>(pictureModel));
             }
-
-            return CreatedAtRoute(nameof(GetPictureByID), new { Id = pictureDTO.Id }, pictureDTO);
+            else
+            {
+                // Handle the case where the UID is not received
+                return StatusCode(500, "Failed to obtain UID from RabbitMQ.");
+            }
         }
+
+
+
+
+
+
+
+
 
         private void ProcessMessageLocally(PictureReadDTO pictureDTO)
         {
-            // Process the message (e.g., create a user in the database)
+            // Process the message locally (e.g., create a user in the database)
             Console.WriteLine($" [x] Received 'New picture created: {pictureDTO.Text}'");
 
-            // Save the user to the database
+            // Save the picture to the database
             var pictureModel = _mapper.Map<Pictures>(pictureDTO);
             _repository.CreatePicture(pictureModel);
             _repository.saveChanges();
