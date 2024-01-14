@@ -54,8 +54,8 @@ namespace MediaService.Controllers
             var pictureModel = _mapper.Map<Pictures>(pictures);
 
             // Step 1: Create the picture in the database
-            ////_repository.CreatePicture(pictureModel);
-            //////_repository.saveChanges();
+            // _repository.CreatePicture(pictureModel);
+            // _repository.SaveChanges();
 
             // Step 2: Get UID from RabbitMQ
             var uidListener = serviceProvider.GetRequiredService<RabbitMQListener>();
@@ -89,6 +89,7 @@ namespace MediaService.Controllers
                 return StatusCode(500, "Failed to obtain UID from RabbitMQ.");
             }
         }
+
 
 
 

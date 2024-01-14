@@ -32,8 +32,11 @@ namespace MediaService
                 {
                     var bodyBytes = ea.Body.ToArray();
                     uid = Encoding.UTF8.GetString(bodyBytes);
+
+                    // Note: No manual acknowledgment, let RabbitMQ handle it automatically
                 };
 
+                // Set autoAck to true
                 channel.BasicConsume(queue: "uid_queue", autoAck: true, consumer: consumer);
 
                 return uid;
