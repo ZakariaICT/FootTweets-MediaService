@@ -34,10 +34,11 @@ namespace MediaService
                     uid = Encoding.UTF8.GetString(bodyBytes);
 
                     // Note: No manual acknowledgment, let RabbitMQ handle it automatically
+                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                 };
 
                 // Set autoAck to true
-                channel.BasicConsume(queue: "uid_queue", autoAck: true, consumer: consumer);
+                channel.BasicConsume(queue: "uid_queue", autoAck: false, consumer: consumer);
 
                 return uid;
             }
