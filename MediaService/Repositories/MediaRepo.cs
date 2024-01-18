@@ -6,11 +6,18 @@ namespace MediaService.Repositories
     public class MediaRepo : IMediaRepo
     {
         private readonly AppDbContext _context;
+        private List<Pictures> pictureItems;
 
         public MediaRepo(AppDbContext context)
         {
             _context = context;
         }
+
+        public MediaRepo(List<Pictures> pictureItems)
+        {
+            this.pictureItems = pictureItems;
+        }
+
         public void CreatePicture(Pictures plat)
         {
             if (plat == null)
