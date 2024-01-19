@@ -37,8 +37,7 @@ namespace MediaService.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Uid")
-                        .IsRequired()
+                    b.Property<string>("UidAuth")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

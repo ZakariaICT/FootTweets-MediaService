@@ -64,7 +64,7 @@ namespace MediaService.Controllers
             if (!string.IsNullOrEmpty(uid))
             {
                 // Step 3: Use the received UID to handle the creation of a new picture
-                pictureModel.Uid = uid;
+                pictureModel.UidAuth = uid;
                 _repository.CreatePicture(pictureModel);
                 _repository.saveChanges();
 
@@ -78,7 +78,7 @@ namespace MediaService.Controllers
                 {
                     var channel = connection.CreateModel();
                     var rabbitMQService = new RabbitMQService(channel);
-                    rabbitMQService.SendMessage($"New picture created: {pictureModel.Text}, {pictureModel.Uid}");
+                    rabbitMQService.SendMessage($"New picture created: {pictureModel.Text}, {pictureModel.UidAuth}");
                 }
 
                 return CreatedAtRoute(nameof(GetPictureByID), new { Id = pictureModel.Id }, _mapper.Map<PictureReadDTO>(pictureModel));

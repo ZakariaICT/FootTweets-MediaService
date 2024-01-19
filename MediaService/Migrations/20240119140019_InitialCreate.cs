@@ -19,7 +19,7 @@ namespace MediaService.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Text = table.Column<string>(type: "text", nullable: false),
                     PictureURL = table.Column<string>(type: "text", nullable: false),
-                    Uid = table.Column<string>(type: "text", nullable: false)
+                    UidAuth = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

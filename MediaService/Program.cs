@@ -33,20 +33,21 @@ builder.Services.AddSingleton(serviceProvider =>
     };
 
     var connection = factory.CreateConnection();
+    var channel = connection.CreateModel();
 
     // Provide the necessary variables and methods to handle the UID
-    var pictureRepository = serviceProvider.GetRequiredService<IMediaRepo>();
+    //var pictureRepository = serviceProvider.GetRequiredService<IMediaRepo>();
 
     // Provide the callback function for handling the UID
     Action<string> onUidReceived = uid =>
     {
         // Use the received UID to handle the creation of a new picture
         var pictureModel = new Pictures(); // Replace with your actual logic
-        pictureModel.Uid = uid;
+        pictureModel.UidAuth = uid;
 
         // Save the updated picture model to the database
-        pictureRepository.CreatePicture(pictureModel);
-        pictureRepository.saveChanges();
+        //pictureRepository.CreatePicture(pictureModel);
+        //pictureRepository.saveChanges();
     };
 
     // Provide the callback function for handling the tweet request
@@ -58,13 +59,19 @@ builder.Services.AddSingleton(serviceProvider =>
     };
 
     // Create and return RabbitMQListener with both callback functions
-    return new RabbitMQListener();
+    return new RabbitMQListener(serviceProvider, connection, channel);
 });
+
+//var app = builder.Build();
+
+//// Initialize RabbitMQListener to start listening for UID messages
+//var rabbitMQListener = app.Services.GetRequiredService<RabbitMQListener>();
 
 var app = builder.Build();
 
 // Initialize RabbitMQListener to start listening for UID messages
 var rabbitMQListener = app.Services.GetRequiredService<RabbitMQListener>();
+rabbitMQListener.StartListening(configuration);
 
 using (var scope = app.Services.CreateScope())
 {

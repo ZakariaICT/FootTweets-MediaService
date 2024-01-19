@@ -14,6 +14,6 @@ namespace MediaService.DTO
         [Required]
         public string PictureURL { get; set; }
 
-        public string Uid { get; set; }
+        public string UidAuth { get; set; }
     }
 }

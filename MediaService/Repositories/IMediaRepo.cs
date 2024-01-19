@@ -6,7 +6,7 @@ namespace MediaService.Repositories
     {
         bool saveChanges();
 
-        void DeletePicturesByUserId(string Uid);
+        void DeletePicturesByUserId(string UidAuth);
 
         IEnumerable<Pictures> GetAllPictures();
         Pictures GetPictureByID(int id);

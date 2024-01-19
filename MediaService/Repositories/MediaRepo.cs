@@ -41,7 +41,7 @@ namespace MediaService.Repositories
 
         public void DeletePicturesByUserId(string Uid)
         {
-            var picturesToDelete = _context.pictures.Where(p => p.Uid == Uid).ToList();
+            var picturesToDelete = _context.pictures.Where(p => p.UidAuth == Uid).ToList();
 
             foreach (var picture in picturesToDelete)
             {
