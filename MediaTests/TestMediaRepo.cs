@@ -22,6 +22,11 @@ namespace MediaTests
             throw new NotImplementedException();
         }
 
+        public void DeletePicturesByUserId(string Uid)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Pictures> GetAllPictures()
         {
             return _pictureItems.ToList();

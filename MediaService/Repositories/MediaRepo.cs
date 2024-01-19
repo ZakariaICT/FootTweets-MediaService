@@ -39,6 +39,19 @@ namespace MediaService.Repositories
             return _context.pictures.FirstOrDefault(p => p.Id == id);
         }
 
+        public void DeletePicturesByUserId(string Uid)
+        {
+            var picturesToDelete = _context.pictures.Where(p => p.Uid == Uid).ToList();
+
+            foreach (var picture in picturesToDelete)
+            {
+                _context.pictures.Remove(picture);
+            }
+
+            // Save changes to commit the deletions
+            _context.SaveChanges();
+        }
+
         public bool saveChanges()
         {
             return (_context.SaveChanges() >= 0);

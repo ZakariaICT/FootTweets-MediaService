@@ -6,11 +6,25 @@ using MediaService.Model;
 using Microsoft.Extensions.DependencyInjection;
 using MediaService.DTO;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using System.Threading.Channels;
+using MediaService.Repositories;
 
 namespace MediaService
 {
     public class RabbitMQListener
     {
+        private readonly IMediaRepo _mediaRepo;
+
+        public RabbitMQListener(IMediaRepo mediaRepo)
+        {
+            _mediaRepo = mediaRepo;
+        }
+
+        public RabbitMQListener()
+        { 
+            
+        }
         public string GetUidFromQueue(IServiceProvider serviceProvider)
         {
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();
@@ -71,6 +85,50 @@ namespace MediaService
                 };
 
                 channel.BasicConsume(queue: "tweets_queue", autoAck: true, consumer: consumer);
+            }
+        }
+
+
+        public void deleteUsersTweets(IConnection _connection, IModel _channel)
+        {
+            // Initialize RabbitMQ connection and channel here (similar to previous code)
+            // ...
+            _channel.QueueDeclare(queue: "user.deletion",
+                                  durable: false,
+                                  exclusive: false,
+                                  autoDelete: false,
+                                  arguments: null);
+
+            var consumer = new EventingBasicConsumer(_channel);
+            consumer.Received += (model, ea) =>
+            {
+                HandleUserDeletion(ea);
+            };
+
+            _channel.BasicConsume(queue: "user.deletion",
+                                   autoAck: true,
+                                   consumer: consumer);
+        }
+
+
+
+        public void HandleUserDeletion(BasicDeliverEventArgs e)
+        {
+            try
+            {
+                // Convert the message body (ReadOnlyMemory<byte>) to a byte[]
+                byte[] messageBodyBytes = e.Body.ToArray();
+                string messageBody = Encoding.UTF8.GetString(messageBodyBytes);
+                string userId = messageBody;
+
+                // Delete media associated with the user ID from the database
+                _mediaRepo.DeletePicturesByUserId(userId);
+
+                Console.WriteLine($"Media related to User with ID {userId} deleted.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error handling user deletion message: {ex.Message}");
             }
         }
 
