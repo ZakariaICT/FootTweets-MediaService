@@ -92,19 +92,20 @@ namespace MediaService
             {
                 channel.QueueDeclare(queue: "uid_queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
 
-                // Use BasicGet instead of setting up a consumer
-                var result = channel.BasicGet("uid_queue", false);
-                if (result == null)
+                var consumer = new EventingBasicConsumer(channel);
+                string uid = null;
+
+                consumer.Received += (model, ea) =>
                 {
-                    // No message available at this time
-                    return null;
-                }
+                    var bodyBytes = ea.Body.ToArray();
+                    uid = Encoding.UTF8.GetString(bodyBytes);
 
-                var bodyBytes = result.Body.ToArray();
-                var uid = Encoding.UTF8.GetString(bodyBytes);
+                    // Note: No manual acknowledgment, let RabbitMQ handle it automatically
+                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                };
 
-                // Do not acknowledge the message, so it remains in the queue
-                // channel.BasicAck(result.DeliveryTag, false); // Commented out
+                // Set autoAck to true
+                channel.BasicConsume(queue: "uid_queue", autoAck: false, consumer: consumer);
 
                 return uid;
             }
