@@ -22,8 +22,17 @@ spec:
               value: mypassword
             - name: POSTGRES_DB
               value: mydatabase
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           ports:
             - containerPort: 5433
+          volumeMounts:
+            - name: media-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: media-storage
+          persistentVolumeClaim:
+            claimName: postgres-media-pvc
 ---
 apiVersion: v1
 kind: Service
