@@ -53,30 +53,22 @@ namespace MediaService.Controllers
         {
             var pictureModel = _mapper.Map<Pictures>(pictures);
 
-            // Step 1: Create the picture in the database
-            // _repository.CreatePicture(pictureModel);
-            // _repository.SaveChanges();
-
-            // Step 2: Get UID from RabbitMQ
-            var uidListener = serviceProvider.GetRequiredService<RabbitMQListener>();
-            var uid = uidListener.GetUidFromQueue(serviceProvider);
-
-            if (!string.IsNullOrEmpty(uid))
+            if (!string.IsNullOrEmpty(pictures.UidAuth))
             {
-                // Step 3: Use the received UID to handle the creation of a new picture
-                pictureModel.UidAuth = uid;
+                // Use the UID directly from the DTO
+                pictureModel.UidAuth = pictures.UidAuth;
                 _repository.CreatePicture(pictureModel);
                 _repository.saveChanges();
 
-                // Step 4: Send RabbitMQ message for UID
+                // Sending RabbitMQ message (optional, adjust as needed)
                 var factory = new ConnectionFactory
                 {
                     Uri = new Uri(configuration["RabbitMQConnection"])
                 };
 
                 using (var connection = factory.CreateConnection())
+                using (var channel = connection.CreateModel())
                 {
-                    var channel = connection.CreateModel();
                     var rabbitMQService = new RabbitMQService(channel);
                     rabbitMQService.SendMessage($"New picture created: {pictureModel.Text}, {pictureModel.UidAuth}");
                 }
@@ -85,19 +77,10 @@ namespace MediaService.Controllers
             }
             else
             {
-                // Handle the case where the UID is not received
-                return StatusCode(500, "Failed to obtain UID from RabbitMQ.");
+                // Handle the case where the UID is not provided
+                return BadRequest("UID is required to create a picture.");
             }
         }
-
-
-
-
-
-
-
-
-
 
         private void ProcessMessageLocally(PictureReadDTO pictureDTO)
         {
